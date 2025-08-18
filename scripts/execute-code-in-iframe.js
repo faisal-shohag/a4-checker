@@ -62,7 +62,7 @@ function executeCodeInIframe(code, testCase, func, timeLimit = 2000) {
 
           try {
             // This is where the user's code is injected and evaluated.
-              eval(\`${code.replace(/`/g, "\\`")}\`);
+        eval(${JSON.stringify(code)});
 
             // IIFE to encapsulate the function execution logic.
             (function() {
@@ -149,3 +149,5 @@ function executeCodeInIframe(code, testCase, func, timeLimit = 2000) {
     document.body.appendChild(iframe);
   });
 }
+
+
