@@ -58,7 +58,7 @@ const checker = async () => {
 
 
 const manualCheck = async () => {
-    const studentSubmisson = document.getElementById("studentCode").value;
+    const studentSubmisson = cm.getValue();;
     const submitedNum = document.getElementById("submitted_at").value;
 
     const { maxScore, totalScore, problems } = await runTests(extractCodeBlocks(studentSubmisson), testCases, '', 'manual')
