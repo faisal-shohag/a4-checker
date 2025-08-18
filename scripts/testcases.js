@@ -4,23 +4,34 @@ const testCases = {
     parameter: 1,
     functionName: "totalFine",
     tests: [
+      { input: 100, expected: 150, description: "expected = 150" },
       { input: 200, expected: 270, description: "expected = 270" },
       { input: 50, expected: 90, description: "expected = 90" },
-      { input: 552, expected: 692.4, description: "expected = 692.4" },
-      { input: 920, expected: 1134, description: "expected = 1134" },
-      { input: 460, expected: 582, description: "expected = 582" },
-      { input: 1000, expected: 1230, description: "expected = 1230" },
+      { input: 60, expected: 102, description: "expected = 102" },
+      { input: 410, expected: 522, description: "expected = 522" },
     ],
     challenges: [
       { input: 0, expected: "Invalid", description: "expected = Invalid" },
-      { input: -35, expected: "Invalid", description: "expected = Invalid" },
-      { input: "65", expected: "Invalid", description: "expected = Invalid" },
       {
-        input: "Gorib",
+        input: "gorib",
         expected: "Invalid",
         description: "expected = Invalid",
       },
-      { input: null, expected: "Invalid", description: "expected = Invalid" },
+      {
+        input: -500,
+        expected: "Invalid",
+        description: "expected = Invalid",
+      },
+      {
+        input: true,
+        expected: "Invalid",
+        description: "expected = Invalid",
+      },
+      {
+        input: { fare: "30" },
+        expected: "Invalid",
+        description: "expected = Invalid",
+      },
     ],
   },
   onlyCharacter: {
@@ -29,34 +40,44 @@ const testCases = {
     parameter: 1,
     tests: [
       {
-        input: "  h e llo wor   ld",
-        expected: "HELLOWORLD",
-        description: "expected = HELLOWORLD",
+        input: "h e l  lo  ",
+        expected: "HELLO",
+        description: "expected = HELLO",
       },
       {
-        input: "Cy   ber- At  tac k  ",
-        expected: "CYBER-ATTACK",
-        description: "expected = CYBER-ATTACK",
+        input: " p r o   gram m ing",
+        expected: "PROGRAMMING",
+        description: "expected = PROGRAMMING",
       },
       {
-        input: " ha ck m e 1 @ru.c  n  ",
-        expected: "HACKME1@RU.CN",
-        description: "expected = HACKME1@RU.CN",
+        input: "cod e  ",
+        expected: "CODE",
+        description: "expected = CODE",
       },
       {
-        input: "Serv er : : Do wn",
-        expected: "SERVER::DOWN",
-        description: "expected = SERVER::DOWN",
+        input: "faisal 1 # 1 ",
+        expected: "FAISAL1#1",
+        description: "expected = FAISAL1#1",
+      },
+      {
+        input: " j- 6 7@ p hero.c om  ",
+        expected: "J-67@PHERO.COM",
+        description: "expected = J-67@PHERO.COM",
       },
     ],
     challenges: [
+      { input: 1, expected: "Invalid", description: "expected = Invalid" },
       {
-        input: ["hack", "me"],
+        input: true,
         expected: "Invalid",
         description: "expected = Invalid",
       },
-      { input: true, expected: "Invalid", description: "expected = Invalid" },
-      { input: {}, expected: "Invalid", description: "expected = Invalid" },
+      {
+        input: { code: "data" },
+        expected: "Invalid",
+        description: "expected = Invalid",
+      },
+      { input: [], expected: "Invalid", description: "expected = Invalid" },
     ],
   },
   bestTeam: {
@@ -65,37 +86,88 @@ const testCases = {
     tests: [
       {
         input: [
-          { name: "Brazil", foul: 5, cardY: 1, cardR: 0 },
-          { name: "Argentina", foul: 7, cardY: 0, cardR: 0 },
+          {
+            name: "Brazil",
+            foul: 3,
+            cardY: 1,
+            cardR: 2,
+          },
+          {
+            name: "Germany",
+            foul: 5,
+            cardY: 0,
+            cardR: 4,
+          },
         ],
         expected: "Brazil",
         description: "expected = Brazil",
       },
       {
         input: [
-          { name: "Germany", foul: 12, cardY: 0, cardR: 0 },
-          { name: "Sweden", foul: 7, cardY: 4, cardR: 1 },
+          {
+            name: "Bangladesh",
+            foul: 6,
+            cardY: 0,
+            cardR: 0,
+          },
+          {
+            name: "India",
+            foul: 15,
+            cardY: 0,
+            cardR: 0,
+          },
+        ],
+        expected: "Bangladesh",
+        description: "expected = Bangladesh",
+      },
+      {
+        input: [
+          {
+            name: "Japan",
+            foul: 10,
+            cardY: 0,
+            cardR: 0,
+          },
+          {
+            name: "Korea",
+            foul: 5,
+            cardY: 2,
+            cardR: 3,
+          },
         ],
         expected: "Tie",
         description: "expected = Tie",
       },
-      {
-        input: [
-          { name: "Germany", foul: 10, cardY: 1, cardR: 1 },
-          { name: "France", foul: 10, cardY: 2, cardR: 1 },
-        ],
-        expected: "Germany",
-        description: "expected = Germany",
-      },
     ],
     challenges: [
       {
-        input: [{ name: "Germany", foul: 10, cardY: 1, cardR: 1 }, "France"],
+        input: ["France", "Portugal"],
         expected: "Invalid",
         description: "expected = Invalid",
       },
       {
-        input: ["Brazil", "Argentina"],
+        input: [
+          {
+            name: "Jordan",
+            foul: 6,
+            cardY: 0,
+            cardR: 0,
+          },
+          true,
+        ],
+        expected: "Invalid",
+        description: "expected = Invalid",
+      },
+      {
+        input: [
+          180,
+          {
+            name: "Korea",
+            foul: 5,
+            cardY: 2,
+            cardR: 3,
+          },
+        ],
         expected: "Invalid",
         description: "expected = Invalid",
       },
@@ -116,32 +188,29 @@ const testCases = {
       },
       {
         input: [
-          [34, 5, 7, 9],
-          [34, 5, 7],
+          [11, 12],
+          [21, 23],
         ],
         expected: false,
         description: "expected = false",
       },
       {
-        input: [
-          [1, undefined, 3],
-          [1, null, 3],
-        ],
-        expected: false,
-        description: "expected = false",
-      },
-      {
-        input: [
-          [1, 4, 5],
-          [1, 4, 5],
-        ],
+        input: [[99], [99]],
         expected: true,
         description: "expected = true",
       },
       {
         input: [
-          ["1", "4", 4],
-          [1, 4, 4],
+          [23, 45, 67, 99],
+          [23, 45, 67],
+        ],
+        expected: false,
+        description: "expected = false",
+      },
+      {
+        input: [
+          [23, 45, 67],
+          ["23", 45, "67"],
         ],
         expected: false,
         description: "expected = false",
@@ -149,12 +218,22 @@ const testCases = {
     ],
     challenges: [
       {
-        input: [[2, 5, 6], 256],
+        input: [
+          {
+            arr: [1, 3],
+          },
+          [1, 3],
+        ],
         expected: "Invalid",
         description: "expected = Invalid",
       },
       {
-        input: [{ data: [2, 5, 6] }, [2, 5, 6]],
+        input: [[1, 3], false],
+        expected: "Invalid",
+        description: "expected = Invalid",
+      },
+      {
+        input: ["1,2", "3,2"],
         expected: "Invalid",
         description: "expected = Invalid",
       },
@@ -166,35 +245,71 @@ const testCases = {
     parameter: 1,
     tests: [
       {
+        input: [90, 87, 67],
+        expected: {
+          finalScore: 81,
+          pass: 3,
+          fail: 0,
+        },
+        description: "expected = {finalScore:81,pass:3,fail:0}",
+      },
+      {
+        input: [99, 34, 56, 32],
+        expected: {
+          finalScore: 55,
+          pass: 2,
+          fail: 2,
+        },
+        description: "expected = {finalScore:55,pass:2,fail:2}",
+      },
+      {
         input: [],
-        expected: { finalScore: 0, pass: 0, fail: 0 },
-        description: "expected = { finalScore: 0, pass: 0, fail: 0 }",
+        expected: {
+          finalScore: 0,
+          pass: 0,
+          fail: 0,
+        },
+        description: "expected = {finalScore:0,pass:0,fail:0}",
       },
       {
-        input: [98, 87, 67, 91, 92, 33, 87],
-        expected: { finalScore: 79, pass: 6, fail: 1 },
-        description: "expected = { finalScore: 79, pass: 6, fail: 1 }",
+        input: [30, 35, 39],
+        expected: {
+          finalScore: 35,
+          pass: 0,
+          fail: 3,
+        },
+        description: "expected = {finalScore:35,pass:0,fail:3}",
       },
       {
-        input: [99, 87, 67, 12, 87],
-        expected: { finalScore: 70, pass: 4, fail: 1 },
-        description: "expected = { finalScore: 70, pass: 4, fail: 1 }",
-      },
-      {
-        input: [99],
-        expected: { finalScore: 99, pass: 1, fail: 0 },
-        description: "expected = { finalScore: 99, pass: 1, fail: 0 }",
+        input: [39, 40],
+        expected: {
+          finalScore: 40,
+          pass: 1,
+          fail: 1,
+        },
+        description: "expected = {finalScore:40,pass:1,fail:1}",
       },
     ],
     challenges: [
-      { input: 100, expected: "Invalid", description: "expected = Invalid" },
       {
-        input: "marks",
+        input: 1,
         expected: "Invalid",
         description: "expected = Invalid",
       },
       {
-        input: { math: 90 },
+        input: true,
+        expected: "Invalid",
+        description: "expected = Invalid",
+      },
+      {
+        input: "98,79,81",
+        expected: "Invalid",
+        description: "expected = Invalid",
+      },
+      {
+        input: {
+          result: [100, 98, 67],
+        },
         expected: "Invalid",
         description: "expected = Invalid",
       },

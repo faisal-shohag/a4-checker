@@ -24,9 +24,9 @@ function generateFeedback(solutionResult, testCases, marks, submitedNum) {
     html += `<h3>🔹 <u><b>Test Cases</b></u></h3><ul>`;
     for (const test of solution.testCases || []) {
       if (test.passed) {
-        html += `<li>✅ <b>Input:</b> <code style="color:green;">${JSON.stringify(test.input)}</code> → <b >Output:</b> <code style="color:green;">${JSON.stringify(test.actual)}</code></li>`;
+        html += `<li style="text-align: left;">✅ <b>Input:</b> <code style="color:green; text-align: left;">${JSON.stringify(test.input)}</code> → <b >Output:</b> <code style="color:green;">${JSON.stringify(test.actual)}</code></li>`;
       } else {
-        html += `<li style="color:red;">❌ <b>Input:</b> <code>${JSON.stringify(test.input)}</code><br>
+        html += `<li style="color:red; text-align: left;">❌ <b>Input:</b> <code>${JSON.stringify(test.input)}</code><br>
                  Expected: <code>${JSON.stringify(test.expected)}</code><br>
                  Got: <code>${JSON.stringify(test.actual)}</code>`;
         if (test.error) {
@@ -41,9 +41,9 @@ function generateFeedback(solutionResult, testCases, marks, submitedNum) {
     html += `<br><h3>🔸 <u><b>Challenge Cases</b></u></h3><ul>`;
     for (const ch of solution.challenges || []) {
       if (ch.passed) {
-        html += `<li>✅ <b>Input:</b> <code style="color:green;">${JSON.stringify(ch.input)}</code> → <b>Output:</b> <code style="color:green;">${JSON.stringify(ch.actual)}</code></li>`;
+        html += `<li style="text-align: left;">✅ <b>Input:</b> <code style="color:green;">${JSON.stringify(ch.input)}</code> → <b>Output:</b> <code style="color:green;">${JSON.stringify(ch.actual)}</code></li>`;
       } else {
-        html += `<li style="color:red;">❌ <b>Input:</b> <code>${JSON.stringify(ch.input)}</code><br>
+        html += `<li style="color:red; text-align: left;">❌ <b>Input:</b> <code>${JSON.stringify(ch.input)}</code><br>
                  Expected: <code>${JSON.stringify(ch.expected)}</code><br>
                  Got: <code>${JSON.stringify(ch.actual)}</code>`;
         if (ch.error) {
@@ -52,9 +52,18 @@ function generateFeedback(solutionResult, testCases, marks, submitedNum) {
         html += `</li>`;
       }
     }
-    html += `</ul><h2 style="border-bottom: 1px solid #e2e2e2;"></h2><br>`;
+    html += `</ul><br>`;
 
-
+    
+   if(solution.totalScore === 12) {
+    html += `<b>🎉Yayy...! You got full marks for this solution.</b><hr><br>`;
+   }
+   else if(solution.totalScore < 12 && solution.totalScore !== 0) {
+    html += `<b>👍Good Effort!  Not all test cases passed. However, you’ve earned marks for the correctly passed test casess</b><hr><br>`;
+   } else if(solution.totalScore === 0) {
+    html += `<b>❗No marks awarded — please revisit the requirements before "Recheck".</b><hr><br>`;
+   }
+   html += `<h2 style="border-bottom: 1px solid #e2e2e2;"></h2>`
     // // Score
     // html += `<p><b>Score:</b> ${solution.totalScore}/${solution.maxTotalScore}</p><hr><br><br>`;
   }

@@ -5,22 +5,53 @@ const checker = async () => {
     let studentSubmisson = rawSubmission[9].innerText;
     let submitedNum = document.getElementsByClassName("font-weight-bold pl-2 ")[0]
         .innerText;
-    // console.log({ studentSubmisson, rawSubmission })
-    const { totalScore, problems } = await runTests(extractCodeBlocks(studentSubmisson), testCases)
-
-    // mark field
     const markField = document.querySelector('#Mark');
     markField.focus();
-    const final_marks = getFinalMark(60, totalScore, parseInt(submitedNum))
-    navigator.clipboard.writeText(final_marks)
-    markField.value = final_marks;
+    const container = document.querySelectorAll('.col-md-12')
+    const el = document.createElement('div');
+    el.style.cssText = `
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 7px 20px;
+  font-size: 18px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  background: #2eb85c;
+  color: white;
+  font-family: 'Inter';
+`;
+    el.textContent = "⌯⌲⏳ Initializing....";
+    container[15].appendChild(el);
 
-    // feedback
-    const feedbacks = generateFeedback(problems, testCases, totalScore, submitedNum)
-    console.log(feedbacks)
-    // quill.clipboard.dangerouslyPasteHTML(feedbacks);
-    const editor = document.querySelector('.ql-editor')
-    editor.innerHTML = `<p>${feedbacks}</p>`
+    try {
+        const { totalScore, problems } = await runTests(extractCodeBlocks(studentSubmisson), testCases, el)
+        const final_marks = getFinalMark(60, totalScore, parseInt(submitedNum))
+        navigator.clipboard.writeText(final_marks)
+        markField.value = final_marks;
+
+        el.innerHTML = `<div>
+    <div>⌯⌲✅ Successfully executed!</div>
+    <div>⌯⌲📋 Marks(${final_marks}) copied to clipboard!</div>
+    </div>`;
+
+
+        // feedback
+        const feedbacks = generateFeedback(problems, testCases, totalScore, submitedNum)
+        // console.log(feedbacks)
+        // quill.clipboard.dangerouslyPasteHTML(feedbacks);
+        const editor = document.querySelector('.ql-editor')
+        editor.innerHTML = `<p>${feedbacks}</p>`
+
+    } catch (error) {
+        el.innerHTML = `<div style="font-weight: bold;font-weight: bold;
+    margin-top: 20px;
+    padding: 7px 20px;
+    font-size: 18px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    background: crimson; color:white;">⌯⌲❌ Error occurred! ${error.toString()}</div>`
+    }
+
 
 };
 // checker()
@@ -28,12 +59,12 @@ const checker = async () => {
 
 const manualCheck = async () => {
     const studentSubmisson = document.getElementById("studentCode").value;
-     const submitedNum = document.getElementById("submitted_at").value;
+    const submitedNum = document.getElementById("submitted_at").value;
 
-    const { maxScore, totalScore, problems } = await runTests(extractCodeBlocks(studentSubmisson), testCases)
+    const { maxScore, totalScore, problems } = await runTests(extractCodeBlocks(studentSubmisson), testCases, '', 'manual')
     const feedbacks = generateFeedback(problems, testCases, totalScore, submitedNum)
-  
-quill.clipboard.dangerouslyPasteHTML(feedbacks);
+
+    quill.clipboard.dangerouslyPasteHTML(feedbacks);
     document.querySelector('#marks').value = getFinalMark(60, totalScore, parseInt(submitedNum))
 
 }

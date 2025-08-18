@@ -1,6 +1,7 @@
 
-async function runTests(solution, testcases) {
+async function runTests(solution, testcases, container, status="extension") {
     // console.log("Starting test execution...", solution, testcases);
+       if(status !== "manual") container.innerHTML = `<div>⌯⌲⏳Starting test execution...</div>`;
 
     const results = {
         totalScore: 0,
@@ -27,6 +28,7 @@ async function runTests(solution, testcases) {
         }
 
         // console.log(`\n=== Testing ${functionName} ===`);
+           if(status !== "manual") container.innerHTML = `<div>⌯⌲🧪Testing ${functionName}</div>`;
 
         const problemResult = {
             name: functionName,
