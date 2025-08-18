@@ -1,0 +1,46 @@
+{
+	"name": "A4 Checker",
+	"description": "Assignment 4 automatic code executor and feedback generator. Made with ❤️‍🔥 By Abu Nayim Faisal",
+	"version": "1.0.0",
+	"permissions": [
+		"activeTab",
+		"cookies",
+		"tabs",
+		"storage"
+	],
+	"action": {
+		"default_icon": {
+			"16": "./assets/logo.png",
+			"48": "./assets/logo.png",
+			"128": "./assets/logo.png"
+		},
+		"default_popup": "extension.html"
+	},
+	"icons": {
+		"16": "./assets/logo.png",
+		"48": "./assets/logo.png",
+		"128": "./assets/logo.png"
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*.programming-hero.com/*"
+			],
+			"js": [
+				"./scripts/testcases.js",
+				"./scripts/generate-feedbacks.js",
+				"./scripts/run-tests.js",
+				"./scripts/execute-code-in-iframe.js",
+				"./scripts/extract-functional-code-blocks-with-arrow-functions.js",
+				"./scripts/extract-functional-code-blocks.js",
+				"./scripts/utils/deep-equal.js",
+				"./scripts/utils/get-final-marks.js",
+				"./scripts/main.js"
+			]
+		}
+	],
+	"host_permissions": [
+		"https://web.programming-hero.com/*"
+	],
+	"manifest_version": 3
+}
