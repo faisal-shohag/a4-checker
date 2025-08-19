@@ -1,82 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Assignment 4 Auto-Tester</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Assignment 4 Auto-Tester</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/material-darker.min.css">
+  <style>
+    body {
+      background-color: #16171b;
+      color: var(--white);
+      background-image: url("https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif");
+      background-position: 0 0;
+      background-size: 200px 200px;
+      font-family: IBM Plex Sans, sans-serif;
+      /* font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.5; */
+    }
+
+    .background-gradient-red-20 {
+      background-image: url("https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif"), linear-gradient(to right, #42312c, #452225);
+      background-position: 0 0, 0 0;
+      background-size: 200px, auto;
+    }
+
+    .panels_item {
+      background-color: #222326;
+      background-image: url("https://cdn.prod.website-files.com/6674f0cdb5b7b401612cf015/6674f0cdb5b7b401612cf065_noise-50.avif");
+      background-position: 0 0;
+      background-size: 200px;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    .font-inter {
+      font-family: 'Inter';
+    }
+
+    /* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #3A3434;
+  border-radius: 50px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, rgb(61, 14, 189), rgb(224, 59, 155));
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+  </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-4">
-    <div class="max-w-8xl mx-auto">
-    
 
-       <div class="grid gap-5 grid-cols-2">
+<body class=" p-4">
+  <div class="max-w-8xl mx-auto">
 
-       
-         <div class="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-6 md:p-8">
-            <div class="mb-8">
-                <label for="studentCode" class="block text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                    📝 Paste Student's Assignment Code:
-                </label>
-                <textarea 
-                    id="studentCode" 
-                    class="w-full p-4 border-2 border-gray-200 rounded-xl font-mono text-sm resize-y focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-300 hover:border-gray-300"
-                    placeholder="Paste the complete assignment code here..."
-                    ></textarea>
-            </div>
-            
-            <div>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <input  class="p-2 border-2 border-gray-200 rounded font-mono text-sm resize-y focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-300 hover:border-gray-300" id="submitted_at" type="text" value="60" placeholder="Submitted at" />
-                <button 
-                    onclick="manualCheck()" 
-                    class="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 text-lg">
-                    🧪 Run All Tests
-                </button>
-            
-            </div>
-            
-            <div id="results" class="space-y-6"></div>
-            </div>
+
+    <div class="grid gap-5 lg:grid-cols-2 grid-cols-1">
+
+
+      <div class="background-gradient-red-20 rounded-xl shadow-2xl p-6 md:p-8">
+        <div class="mb-8">
+          <label for="studentCode"
+            class="block text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2 text-white">
+            Source
+          </label>
+          <textarea id="studentCode"
+            class="w-full p-4 border-2 border-gray-200 rounded-xl font-mono text-sm resize-y focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-300 hover:border-gray-300"
+            placeholder="Paste the complete assignment code here..."></textarea>
         </div>
 
-            <div class="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-6 md:p-8">
-            <h4 class="text-xl font-bold">Feedbacks and Marks</h4>
+        <div>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <input
+              class="p-2 border-2 border-gray-200 rounded  text-sm resize-y focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all duration-300 hover:border-red-300 bg-gray-800 outline-none border-none text-white"
+              id="submitted_at" type="text" value="60" placeholder="Submitted at" />
+            <button id="run" onclick="manualCheck()"
+              class="bg-gradient-to-r from-red-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-1 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 text-lg">
+              <i class="fa-solid fa-person-running"></i>   Run
+            </button>
 
-            <div class="my-3 flex gap-3">
-              <div>
-                  Obtained mark: <input class="p-2 border-2 border-gray-200 rounded font-mono text-sm resize-y focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-300 hover:border-gray-300 " id="marks" type="text" placeholder="Obtained mark"/>
-              </div>
+          </div>
 
-              <div onclick="copyMark()" class="bg-green-500 text-lg font-bold text-white px-3 py-1 rounded-lg cursor-pointer">Copy Mark</div>
-              <!-- <div onclick="copyFeedbacks()" class="bg-green-500 text-lg font-bold text-white px-3 py-1 rounded-lg cursor-pointer">Copy Feedbacks</div> -->
-            
+      
+
+          <div class="bg-gradient-to-r from-[#64748b] to-[#f59e0b] bg-no-repeat p-1 rounded-lg text-white flex flex-col gap-1">
+            <div id="status" class="bg-[#11111177] rounded-lg p-2">
+          
             </div>
 
-            <div>
-              <div  id="editor"></div>
+            <div class="bg-[#111111dd] rounded-lg p-2">
+                <h1 class="font-bold">Updates:(18-08-2025, 8:31PM)</h1>
+                <p>⌯⌲ Fixed the regex issue.</p>
+                <p>⌯⌲ String-based numbers are now correctly handled as numeric values.</p>
+                <p class="text-sm mt-3"><i>Please pull the latest commits from GitHub to ensure these changes take effect in the extension.</i></p>
             </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <div class="panels_item rounded-xl shadow-2xl  p-6 md:p-8">
+        <h4 class="text-xl font-bold text-white">Feedbacks and Marks</h4>
+
+        <div class="my-3 flex gap-3  items-center text-white">
+          <div>
+            <input
+              class="p-2 border-2 border-gray-200 rounded  text-sm resize-y focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all duration-300 hover:border-red-300 bg-gray-800 outline-none border-none text-white"
+              id="marks" type="text" placeholder="Obtained mark" />
+          </div>
+
+          <button id="copy" onclick="copyMark()" class="bg-gradient-to-r from-green-500 to-cyan-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-1 px-3 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 ">
+            <span >  <i class="fa-solid fa-copy"></i></span> Copy</button>
         </div>
 
-     
-       </div>
+        <div class="bg-white">
+          <div class="font-inter" id="editor"></div>
+        </div>
+      </div>
+
+
     </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/closetag.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/closebrackets.min.js"></script>
 
 
-    
 
-    <script>
 
-         var cm = CodeMirror.fromTextArea(document.getElementById("studentCode"), {
+  <script>
+
+    var cm = CodeMirror.fromTextArea(document.getElementById("studentCode"), {
       mode: "javascript",
       theme: "material-darker",
       lineNumbers: true,
@@ -87,43 +168,45 @@
 
 
 
-  var quill = new Quill('#editor', {
-  theme: 'snow',
-  modules: {
-    toolbar: [
-      ['bold', 'italic', 'underline'],
-      [{ 'header': [1, 2, false] }],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      ["link"],
-    ]
-  },
-  formats: [
-    'bold', 'italic', 'underline',
-    'header', 'list', 'code',
-  ]
-});
+    var quill = new Quill('#editor', {
+      theme: 'snow',
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline'],
+          [{ 'header': [1, 2, false] }],
+          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+          ["link"],
+        ]
+      },
+      formats: [
+        'bold', 'italic', 'underline',
+        'header', 'list', 'code',
+      ]
+    });
 
 
-  const copyMark = () => {
-    const marks = document.getElementById('marks').value
-      navigator.clipboard.writeText(marks)
+    const copyMark = () => {
+      const marks = document.getElementById('marks').value
+      navigator.clipboard.writeText(marks);
+      const copy = document.getElementById('copy')
+      copy.innerHTML = `<i class="fa-solid fa-check"></i> Copied`
 
-  }
+      setTimeout(() => {
+        copy.innerHTML = `<span >  <i class="fa-solid fa-copy"></i></span> Copy`
+      }, 1500)
 
-//   const copyFeedbacks = () => {
-//    const editor = document.querySelector('.ql-editor')
-//     navigator.clipboard.writeText(editor.innerHTML)
-//   }
-    </script>
+    }
 
-    <script src="./scripts/extract-functional-code-blocks-with-arrow-functions.js"></script>
-    <script src="./scripts/run-tests.js"></script>
-    <script src="./scripts/execute-code-in-iframe.js"></script>
-    <script src="./scripts/testcases.js"></script>
-    <script src="./scripts/generate-feedbacks.js"></script>
-    <script src="./scripts/utils/deep-equal.js"></script>
-    <script src="./scripts/utils/get-final-marks.js"></script>
-    <script src="./scripts/main.js"></script>
+  </script>
+
+  <script src="./scripts/extract-functional-code-blocks-with-arrow-functions.js"></script>
+  <script src="./scripts/run-tests.js"></script>
+  <script src="./scripts/execute-code-in-iframe.js"></script>
+  <script src="./scripts/testcases.js"></script>
+  <script src="./scripts/generate-feedbacks.js"></script>
+  <script src="./scripts/utils/deep-equal.js"></script>
+  <script src="./scripts/utils/get-final-marks.js"></script>
+  <script src="./scripts/main.js"></script>
 </body>
 
 </html>

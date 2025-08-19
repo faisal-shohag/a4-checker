@@ -1,5 +1,3 @@
-
-
 const checker = async () => {
     let rawSubmission = document.getElementsByClassName("col-12 col-md-11");
     let studentSubmisson = rawSubmission[9].innerText;
@@ -42,6 +40,8 @@ const checker = async () => {
         const editor = document.querySelector('.ql-editor')
         editor.innerHTML = `<p>${feedbacks}</p>`
 
+
+
     } catch (error) {
         el.innerHTML = `<div style="font-weight: bold;font-weight: bold;
     margin-top: 20px;
@@ -50,22 +50,47 @@ const checker = async () => {
     border: 2px solid #eee;
     border-radius: 10px;
     background: crimson; color:white;">⌯⌲❌ Error occurred! ${error.toString()}</div>`
+
+        if (run) {
+            run.innerHTML = ` <i class="fa-solid fa-person-running"></i>   Run`
+        }
+
     }
-
-
 };
-// checker()
-
 
 const manualCheck = async () => {
+    const run = document.getElementById('run')
     const studentSubmisson = cm.getValue();;
     const submitedNum = document.getElementById("submitted_at").value;
+    const statusContainer = document.getElementById('status')
+    run.innerHTML = `<span class="animate-spin"><i class="fa-solid fa-circle-notch "></i></span> Run`
 
-    const { maxScore, totalScore, problems } = await runTests(extractCodeBlocks(studentSubmisson), testCases, '', 'manual')
-    const feedbacks = generateFeedback(problems, testCases, totalScore, submitedNum)
+    try {
 
-    quill.clipboard.dangerouslyPasteHTML(feedbacks);
-    document.querySelector('#marks').value = getFinalMark(60, totalScore, parseInt(submitedNum))
+        const { totalScore, problems } = await runTests(extractCodeBlocks(studentSubmisson), testCases, statusContainer, '')
+        const feedbacks = generateFeedback(problems, testCases, totalScore, submitedNum)
+        quill.clipboard.dangerouslyPasteHTML(feedbacks);
+        document.querySelector('#marks').value = getFinalMark(60, totalScore, parseInt(submitedNum))
+        statusContainer.innerHTML = `<div>
+    <div>⌯⌲✅ Successfully executed!</div>
+    </div>`;
+
+        run.innerHTML = ` <i class="fa-solid fa-person-running"></i>   Run`
+
+
+    } catch (error) {
+        statusContainer.innerHTML = `<div style="font-weight: bold;font-weight: bold;
+    margin-top: 20px;
+    padding: 7px 20px;
+    font-size: 18px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    background: crimson; color:white;">⌯⌲❌ Error occurred! ${error.toString()}</div>`
+    }
+
+    run.innerHTML = ` <i class="fa-solid fa-person-running"></i>   Run`
+
+
 
 }
 

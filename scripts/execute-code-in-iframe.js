@@ -7,9 +7,6 @@
  * @returns {Promise<object>} A promise that resolves with an object containing the result, stdout, and any error message.
  */
 function executeCodeInIframe(code, testCase, func, timeLimit = 2000) {
-  // if(func === "isSame") {
-  //   console.log({code, testCase})
-  // }
   return new Promise((resolve, reject) => {
     // Create a sandboxed iframe to isolate the code execution.
     const iframe = document.createElement("iframe");

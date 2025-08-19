@@ -1,7 +1,5 @@
 function generateFeedback(solutionResult, testCases, marks, submitedNum) {
   const solutionMap = Object.fromEntries(solutionResult.map(s => [s.name, s]));
-// quill.insertEmbed(quill.getLength(), 'divider', true, Quill.sources.USER);
-
   let html = ``;
 
   for (const [funcName, testInfo] of Object.entries(testCases)) {

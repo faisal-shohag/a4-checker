@@ -1,15 +1,12 @@
 
-async function runTests(solution, testcases, container, status="extension") {
-    // console.log("Starting test execution...", solution, testcases);
-       if(status !== "manual") container.innerHTML = `<div>⌯⌲⏳Starting test execution...</div>`;
+async function runTests(solution, testcases, container, status = "extension") {
+    if (status !== "manual") container.innerHTML = `<div>⌯⌲⏳Starting test execution...</div>`;
 
     const results = {
         totalScore: 0,
         maxScore: 0,
         problems: []
     };
-
-    // Test cases data structure from the provided JSON
     const problemTests = {
         totalFine: testcases.totalFine,
         onlyCharacter: testcases.onlyCharacter,
@@ -28,7 +25,7 @@ async function runTests(solution, testcases, container, status="extension") {
         }
 
         // console.log(`\n=== Testing ${functionName} ===`);
-           if(status !== "manual") container.innerHTML = `<div>⌯⌲🧪Testing ${functionName}</div>`;
+        if (status !== "manual") container.innerHTML = `<div>⌯⌲🧪Testing <b class="font-mono">${functionName}</b></div>`;
 
         const problemResult = {
             name: functionName,
