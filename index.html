@@ -72,6 +72,8 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+
   </style>
 </head>
 
@@ -88,9 +90,11 @@
             class="block text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2 text-white">
           <i class="fa-solid fa-code"></i>  Source
           </label>
-          <textarea id="studentCode"
+          <div class="rounded-lg overflow-hidden">
+            <textarea id="studentCode"
             class="w-full p-4 border-2 border-gray-200 rounded-xl font-mono text-sm resize-y focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all duration-300 hover:border-gray-300"
             placeholder="Paste the complete assignment code here..."></textarea>
+          </div>
         </div>
 
         <div>
