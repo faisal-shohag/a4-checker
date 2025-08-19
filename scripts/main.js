@@ -72,7 +72,7 @@ const manualCheck = async () => {
         quill.clipboard.dangerouslyPasteHTML(feedbacks);
         document.querySelector('#marks').value = getFinalMark(60, totalScore, parseInt(submitedNum))
         statusContainer.innerHTML = `<div>
-    <div>⌯⌲✅ Successfully executed!</div>
+    <div><i class="fa-solid fa-circle-check"></i> Successfully executed!</div>
     </div>`;
 
         run.innerHTML = ` <i class="fa-solid fa-person-running"></i>   Run`
